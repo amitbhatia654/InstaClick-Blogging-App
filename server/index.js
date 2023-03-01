@@ -16,6 +16,7 @@ const Manager = require('./Manager')
 
 
 app.post('/register', Manager.registerUser)
+app.post('/login', Manager.loginUser)
 
 app.post('/posts', Manager.AddPost)
 app.get('/posts', Manager.getPosts)

@@ -21,6 +21,22 @@ console.log(err)
     }
 }
 
+const loginUser = async (req, res) => {
+    const details = await user.findOne({ email: req.body.email })
+    if (details) {
+        if (req.body.password === details.password) {
+            res.send("user Found")
+        }
+        else {
+            res.send('Email or PassWord not match!')
+        }
+    }
+    else {
+        res.send('Email or PassWord not match!')
+    }
+}
+
+
 const AddPost = async (req, res) => {
     try {
         const data = await new allPost({
@@ -63,5 +79,6 @@ module.exports = {
     AddPost,
     getPosts,
     deletePosts,
-    registerUser
+    registerUser,
+    loginUser
 }
