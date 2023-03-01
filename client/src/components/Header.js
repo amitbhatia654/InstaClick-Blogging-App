@@ -2,12 +2,16 @@ import React, { useEffect } from 'react'
 import { Routes, Route, Link ,useNavigate} from 'react-router-dom'
 import About from './About'
 import Home from './Home'
-import Login from './Login'
 import NewPost from './NewPost'
 
 
 export default function Header({myFunc}) {
     const navigate=useNavigate()
+
+    function handleLogout(){
+        navigate('/')
+        myFunc(false)
+    }
     
     return (
         <div>
@@ -24,7 +28,7 @@ export default function Header({myFunc}) {
                     </div>
 
                     <div className='col-md-2 my-3'>
-                    <button  className='btn btn-primary' onClick={()=>myFunc(false)}>Logout</button> </div>
+                    <button  className='btn btn-primary' onClick={()=>handleLogout()}>Logout</button> </div>
                 </div>
             </div>
 
