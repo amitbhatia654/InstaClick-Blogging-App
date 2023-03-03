@@ -25,7 +25,7 @@ const loginUser = async (req, res) => {
     const details = await user.findOne({ email: req.body.email })
     if (details) {
         if (req.body.password === details.password) {
-            res.send("user Found")
+            res.send({message:"user Found",data:details})
         }
         else {
             res.send('Email or PassWord not match!')

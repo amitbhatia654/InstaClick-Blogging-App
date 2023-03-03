@@ -4,17 +4,21 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate, Route, Routes } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
 import Header from './Header'
+import {useDispatch} from 'react-redux'
+import { loginFunction } from '../store/LoginData'
 
 export default function Login({ myFunc }) {
 
   const { handleSubmit, register, reset } = useForm()
   const [registration, setRegistration] = useState(false)
   const navigate = useNavigate()
+  const dispatch=useDispatch()
 
   const login = async (details) => {
     const { data } = await axios.post('http://localhost:9000/login', details)
-    if (data == 'user Found') {
+    if (data.message == 'user Found') {
       myFunc(true)
+      dispatch(loginFunction(data.data))
     }
     else{
       alert(data)
