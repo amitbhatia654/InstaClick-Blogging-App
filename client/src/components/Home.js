@@ -1,59 +1,45 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import toast, { Toaster } from 'react-hot-toast'
-
-
+import  { Toaster } from 'react-hot-toast'
+import { useSelector } from 'react-redux'
 
 export default function Home() {
   const [blogList, setBlogList] = useState([])
+  var userId = {}
+
+  useSelector((data) => userId = data.cart[0]._id)
 
   useEffect(() => {
     getAllPosts()
-  }, [blogList])
+  }, [])
 
 
   async function getAllPosts() {
-    const { data } = await axios.get('http://localhost:9000/posts')
+    const { data } = await axios.get(`http://localhost:9000/posts/${userId}`)
     setBlogList(data)
   }
 
-
-  const handleDelete = async (id) => {
-    const result = await axios.delete(`http://localhost:9000/posts/${id}`)
-    blogList.filter((d) => !d._id === id)
-    toast.success('Blog Deleted Succesfully')
-
-  }
   return (
     <div>
       {blogList?.map((data, index) => {
         return (
-          <>
+          < div key={index}>
+            <div className='container my-5 homePage '>
+              <div className='row '>
+                <div className='col-md-7 border border-primary'>
 
-            {/* <div className='border my-4 mx-5 border-danger'>
-              <div>Blog No.{index + 1}</div>
-              <div>Title :{data.title}</div>
-              <div>Blog :{data.blog}</div>
-              <div>Location :{data.location}</div>
-              <button onClick={() => handleDelete(data._id)}>Delete</button>
-            </div> */}
+                  <h4>{data?.userName} </h4>
+                  <span><i class="fa-solid fa-location-dot"></i> {data?.location}</span>
 
-            {/* style="width: 18rem; */}
-            <div className='container my-5  '>
-              <div className='row border border-primary'>
-                <div className='col-md-6'>
+                  <div className="card"  >
+                    <img src={`http://localhost:9000/${data?.imageUrl}`} className="card-img-top allImages img-fluid" />
+                    <div>
+                    </div>
+                    <div className="card-body">
+                      <h6 className="card-title">{data?.title}</h6>
 
-                  <div class="card"  >
-                    {/* <img src="..." class="card-img-top" alt="..." /> */}
-                    <div class="card-body">
-                      <h5 class="card-title">{data?.title}</h5>
-                      <p class="card-text">{data?.blog}</p>
-                      <p class="card-text">{data?.location}</p>
-
-                      
                     </div>
                   </div>
-                      <button className='btn btn-primary' onClick={()=>handleDelete(data._id)}>Delete</button>
 
                 </div>
                 <div className='col-md-6'>
@@ -61,10 +47,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
-
-
-          </>
+          </div>
         )
       })}
       <Toaster position="bottom-right" />

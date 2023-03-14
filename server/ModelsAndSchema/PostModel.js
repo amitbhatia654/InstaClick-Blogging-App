@@ -2,8 +2,11 @@ const mongoose=require('mongoose')
 
 const postSchema=new mongoose.Schema({
     title:String,
-    blog:String,
-    location:String
+    location:String,
+    userId:String,
+    imageUrl:String,
+    userName:String
+    
 })
 
 const allPost= new mongoose.model('allpost',postSchema)

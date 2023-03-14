@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Routes, Route, Link ,useNavigate} from 'react-router-dom'
 import About from './About'
 import Home from './Home'
@@ -12,13 +12,12 @@ export default function Header({myFunc}) {
     const navigate=useNavigate()
     const dispatch=useDispatch()
     var loginUser={}
-    const item=useSelector((state)=>state)
-
+    useSelector((state)=>loginUser=state.cart[0])
 
     function handleLogout(){
         navigate('/')
         myFunc(false)
-        dispatch(logoutFunction('this is to check  '))
+        dispatch(logoutFunction(loginUser))
     }
    
     return (
@@ -27,21 +26,21 @@ export default function Header({myFunc}) {
                 <div className='row'>
                     <div className='col-md-10'>
                         <ul className='list-inline myHeader'>
-                            <li>InstaClicks</li>
-                            <li><Link to='/' className='list-inline-item'> Home</Link></li>
-                            <li><Link to='/post' className='list-inline-item'> New Post</Link ></li>
-                            <li><Link exact to='/about' className='list-inline-item'>About Me</Link ></li>
+                            <li className='logo'>InstaClickS </li>
+                            <li><Link to='/' className='list-inline-item mylink'><i class="fa-solid fa-house"></i> Home</Link></li>
+                            <li><Link to='/post' className='list-inline-item mylink'><i class="fa-solid fa-plus"></i>  Create</Link ></li>
+                            <li><Link  to='/about' className='list-inline-item mylink'> <i class="fa-regular fa-circle-user"></i> Profile</Link ></li>
                            
                         </ul>                        
                     </div>
 
-                    <div className='col-md-2 my-3'> Welcome <b></b>  
+                    <div className='col-md-2 my-3'> Welcome <b>{loginUser.name} </b>  
                     <button  className='btn btn-primary' onClick={()=>handleLogout()}>Logout</button> </div>
                 </div>
             </div>
 
             <Routes>
-                <Route  exact path='/' element={<Home />}> </Route>
+                <Route  path='/' element={<Home />}> </Route>
                 <Route path='/about' element={<About />}> </Route>
                 <Route path='/post' element={<NewPost />}> </Route>
                 {/* <Route path='/login' element={<Login />}> </Route> */}

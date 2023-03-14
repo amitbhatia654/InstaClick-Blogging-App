@@ -42,8 +42,53 @@
 display: inline-block;
 font-size: 25px;
 margin: 20px;
-color: red;
+color: black;
 }
+
+.homePage{
+  width: 50%;
+  margin: auto;
+}
+
+.allImages{
+  width: 420px;
+}
+
+.mainDiv{
+  height: 720px;
+}
+
+.logo{
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: yellow;
+}
+
+.addPost{
+  width: 30%;
+  margin: auto;
+  font-size: 20px;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 50px;
+
+}
+
+.mylink{
+   text-decoration: none; 
+   margin-left: 30px;
+}
+
+
+.myimages{
+  height: 350px;
+}
+
+
+
+
 
 
 
