@@ -91,10 +91,6 @@ export default function NewPost() {
           
             </div>
 
-
-
-
-
           </form>
         </div>
 

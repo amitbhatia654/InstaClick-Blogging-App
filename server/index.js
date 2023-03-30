@@ -27,5 +27,4 @@ app.delete('/posts/:id', Manager.deletePosts)
 
 app.get('/myposts/:userId', Manager.getMyPosts)
 
-
 app.listen(9000, () => console.log('listening on port 9000'))

@@ -8,11 +8,12 @@ export default function About() {
 
   useEffect(() => {
     getMyPosts()
-  }, [])
+  },[])
   var aboutMe = {}
   useSelector((data) => aboutMe = data.cart[0])
 
   const getMyPosts = async () => {
+    
     try {
       const { data } = await axios.get(`http://localhost:9000/myposts/${aboutMe._id}`)
       setMyPost(data)
@@ -20,6 +21,17 @@ export default function About() {
 
     catch (err) {
       console.log(err)
+    }
+  }
+
+  const handleDelete =async (id) => {
+    try {
+      const { data } = await axios.delete(`http://localhost:9000/posts/${id}`)
+      console.log(data,'teh response is ')
+    }
+
+    catch (err) {
+      console.error(err)
     }
   }
 
@@ -60,8 +72,6 @@ export default function About() {
       <div className='container-fluid'>
         <div className='row'>
 
-        
-
           {
             mypost?.map((data) => {
               return (
@@ -70,18 +80,19 @@ export default function About() {
                   <div className=''>
 
                     <div className="card "  >
-                      <img src={`http://localhost:9000/${data?.imageUrl}`} className="card-img-top myimages img-fluid" />
+                      <img src={`http://localhost:9000/${data?.imageUrl}`} className="card-img-top myimages img-fluid" alt='My pics' />
                     </div>
+                    <button className='btn btn-primary' onClick={() => handleDelete(data?._id)}>Delete</button>
                   </div>
                 </div>
               )
             })
           }
 
-</div>
+        </div>
       </div>
 
-        
+
 
 
     </div>
