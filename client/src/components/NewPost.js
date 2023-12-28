@@ -13,13 +13,23 @@ export default function NewPost() {
 
   async function addPost(data) {
     const formData = new FormData()
-    formData.append('image', image)
-    formData.append('title', data.title)
-    formData.append('location', data.location)
-    formData.append('userId', userId._id)
-    formData.append('userName', userId.name)
+    // formData.append('image', image)
+    // formData.append('title', data.title)
+    // formData.append('location', data.location)
+    // formData.append('userId', userId._id)
+    // formData.append('userName', userId.name)
 
-    await axios.post('http://localhost:9000/posts', formData)
+    formData.append("lp_campaign_id", "64fb5e8071caf");
+    formData.append("lp_campaign_key", "67yJhdf3cpzxXQqYHrFb");
+    formData.append("name", "test");
+    formData.append("lp_response", "JSON");
+
+
+    //const res = await axios.post('http://localhost:9000/posts', formData)
+    const res = await axios.post('https://emailagencyinc.leadspediatrack.com/post.do', formData)
+
+
+    console.log(res, 'the res is')
     toast.success('Blog Added Succesully')
     reset()
   }
@@ -82,13 +92,13 @@ export default function NewPost() {
             </div>
 
             <div className='col-75'>
-            <label for="location">Location</label>
-            <input type="text"  {...register('location')} />
+              <label for="location">Location</label>
+              <input type="text"  {...register('location')} />
             </div>
 
             <div className='col-75'>
-            <button> Submit</button>
-          
+              <button> Submit</button>
+
             </div>
 
           </form>
